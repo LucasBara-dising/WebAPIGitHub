@@ -12,7 +12,7 @@ namespace WebAPIGitHub.Models
 
         }
 
-        public Usuario(string login_Usu, string nome_Usu, int num_Repos, int num_Seguindo, int num_seguidores, string bio, string ultimo_update)
+        public Usuario(string login_Usu, string nome_Usu, int num_Repos, int num_Seguindo, int num_seguidores, string bio, string ultimo_update, string linkImg)
         {
             Login_Usu = login_Usu;
             Nome_Usu = nome_Usu;
@@ -21,6 +21,7 @@ namespace WebAPIGitHub.Models
             Num_seguidores = num_seguidores;
             Bio = bio;
             Ultimo_update = ultimo_update;
+            LinkImg = linkImg;
         }
 
         public string Login_Usu { get; set; }
@@ -30,5 +31,6 @@ namespace WebAPIGitHub.Models
         public int Num_seguidores { get; set; }
         public string Bio { get; set; }
         public string Ultimo_update { get; set; }
+        public string LinkImg { get; set; }
     }
 }

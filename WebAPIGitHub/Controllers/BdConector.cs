@@ -59,6 +59,7 @@ namespace WebAPIGitHub.Controllers
                     Num_seguidores = int.Parse(retorno["Num_seguidores"].ToString()),
                     Bio = retorno["Bio"].ToString(),
                     Ultimo_update = retorno["Ultimo_update"].ToString(),
+                    LinkImg = retorno["LinkImg"].ToString(),
                 };
                 user.Add(TempUsuario);
             }
@@ -74,7 +75,7 @@ namespace WebAPIGitHub.Controllers
         //insert
         public void adicionaUser(Usuario usuario)
         {
-            MySqlCommand cmd = new MySqlCommand("call SpAddUser(@login_Usu, @nome_Usu, @num_Repos, @num_Seguindo, @num_seguidores, @Bio, @ultimo_update)", conexao);
+            MySqlCommand cmd = new MySqlCommand("call SpAddUser(@login_Usu, @nome_Usu, @num_Repos, @num_Seguindo, @num_seguidores, @Bio, @ultimo_update, @linkImg)", conexao);
             cmd.Parameters.AddWithValue("@login_Usu", usuario.Login_Usu);
             cmd.Parameters.AddWithValue("@nome_Usu", usuario.Nome_Usu);
             cmd.Parameters.AddWithValue("@num_Repos", usuario.Num_Repos);
@@ -82,6 +83,7 @@ namespace WebAPIGitHub.Controllers
             cmd.Parameters.AddWithValue("@num_seguidores", usuario.Num_seguidores);
             cmd.Parameters.AddWithValue("@Bio", usuario.Bio);
             cmd.Parameters.AddWithValue("@ultimo_update", usuario.Ultimo_update);
+            cmd.Parameters.AddWithValue("@linkImg", usuario.LinkImg);
             cmd.ExecuteNonQuery();
         }
 
