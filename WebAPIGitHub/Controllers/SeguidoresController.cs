@@ -8,24 +8,20 @@ using WebAPIGitHub.Models;
 
 namespace WebAPIGitHub.Controllers
 {
-    public class UserController : ApiController
+    public class SeguidoresController : ApiController
     {
-        List<Usuario> usuarios = new List<Usuario>();
-
-
-        //seleciona user pelo login
         //GET: api/User/MostraUser?Login_Usu={Login_Usu}
         [HttpGet]
-        [ActionName("MostraUser")]
-        public IEnumerable<Usuario> GetUsers(string Login_Usu)
+        [ActionName("MostraSeguidores")]
+        public IEnumerable<Seguidores> GetUsers(string Login_Usu)
         {
             //tenta conectar ao banco
             try
             {
                 BdConector db = new BdConector();
-                var user = db.BuscaTodos(Login_Usu);
+                var Segui = db.BuscaTodosSeguidores(Login_Usu);
                 db.Fechar();
-                return user;
+                return Segui;
             }
             catch (Exception e)
             {
@@ -36,10 +32,10 @@ namespace WebAPIGitHub.Controllers
         }
 
         [HttpPost]
-        [ActionName("addUser")]
-        public HttpResponseMessage Post([FromBody] List<Usuario> dados)
+        [ActionName("addSeguidores")]
+        public HttpResponseMessage Post([FromBody] List<Seguidores> dadosSegui)
         {
-            if (dados == null)
+            if (dadosSegui == null)
             {
                 return new HttpResponseMessage(HttpStatusCode.NotModified);
             }
@@ -47,9 +43,9 @@ namespace WebAPIGitHub.Controllers
             //manda adicionar o item 
             //recebe uma lista, faz um laço para recbe um valor de cada vez
             BdConector db = new BdConector();
-            foreach (var item in dados)
+            foreach (var item in dadosSegui)
             {
-                db.adicionaUser(item);
+                db.adicionaSegui(item);
             }
 
             db.Fechar();
@@ -58,6 +54,5 @@ namespace WebAPIGitHub.Controllers
             var response = new HttpResponseMessage(HttpStatusCode.Created);
             return response;
         }
-
     }
 }

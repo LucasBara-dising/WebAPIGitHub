@@ -8,24 +8,20 @@ using WebAPIGitHub.Models;
 
 namespace WebAPIGitHub.Controllers
 {
-    public class UserController : ApiController
+    public class ReposController : ApiController
     {
-        List<Usuario> usuarios = new List<Usuario>();
-
-
-        //seleciona user pelo login
-        //GET: api/User/MostraUser?Login_Usu={Login_Usu}
+        // GET: api/Repos
         [HttpGet]
-        [ActionName("MostraUser")]
-        public IEnumerable<Usuario> GetUsers(string Login_Usu)
+        [ActionName("MostraTodosRepos")]
+        public IEnumerable<Repos> GetUsers(string Login_Usu)
         {
             //tenta conectar ao banco
             try
             {
                 BdConector db = new BdConector();
-                var user = db.BuscaTodos(Login_Usu);
+                var repo = db.BuscaTodosRepos(Login_Usu);
                 db.Fechar();
-                return user;
+                return repo;
             }
             catch (Exception e)
             {
@@ -35,9 +31,10 @@ namespace WebAPIGitHub.Controllers
             }
         }
 
+        // GET: api/Repos/addRepos
         [HttpPost]
-        [ActionName("addUser")]
-        public HttpResponseMessage Post([FromBody] List<Usuario> dados)
+        [ActionName("addRepos")]
+        public HttpResponseMessage Post([FromBody] List<Repos> dados)
         {
             if (dados == null)
             {
@@ -47,9 +44,9 @@ namespace WebAPIGitHub.Controllers
             //manda adicionar o item 
             //recebe uma lista, faz um laço para recbe um valor de cada vez
             BdConector db = new BdConector();
-            foreach (var item in dados)
+            foreach (var dadoRepos in dados)
             {
-                db.adicionaUser(item);
+                db.adicionaRepos(dadoRepos);
             }
 
             db.Fechar();
@@ -58,6 +55,5 @@ namespace WebAPIGitHub.Controllers
             var response = new HttpResponseMessage(HttpStatusCode.Created);
             return response;
         }
-
     }
 }

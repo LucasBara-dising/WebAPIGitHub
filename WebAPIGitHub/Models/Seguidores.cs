@@ -7,7 +7,8 @@ namespace WebAPIGitHub.Models
 {
     public class Seguidores
     {
-        string id_Seg { get; set; }
-        string LinkFoto { get; set; }
+        public string Login_Usu_segui { get; set; }
+        public string id_Seg { get; set; }
+        public string LinkFoto { get; set; }
     }
 }

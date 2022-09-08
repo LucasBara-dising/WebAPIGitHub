@@ -12,17 +12,6 @@ namespace WebAPIGitHub.Models
 
         }
 
-        public Usuario(string login_Usu, string nome_Usu, int num_Repos, int num_Seguindo, int num_seguidores, string bio, string ultimo_update, string linkImg)
-        {
-            Login_Usu = login_Usu;
-            Nome_Usu = nome_Usu;
-            Num_Repos = num_Repos;
-            Num_Seguindo = num_Seguindo;
-            Num_seguidores = num_seguidores;
-            Bio = bio;
-            Ultimo_update = ultimo_update;
-            LinkImg = linkImg;
-        }
 
         public string Login_Usu { get; set; }
         public string Nome_Usu { get; set; }
